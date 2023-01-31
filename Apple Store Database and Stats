@@ -1,0 +1,34 @@
+--Create a store database
+
+CREATE TABLE apples(id INTEGER PRIMARY KEY, name TEXT, flavor TEXT, amount INTEGER, price REAL);
+
+INSERT INTO apples VALUES(1, "Granny Smith", "Sour", 120, 0.75);
+INSERT INTO apples VALUES(2, "Red Delicious", "Mild", 100, 0.50);
+INSERT INTO apples VALUES(3, "Fuji", "Sweet", 200, 1.00);
+INSERT INTO apples VALUES(4, "Pink Lady", "Tart", 50, 0.60);
+INSERT INTO apples VALUES(5, "Honeycrisp", "Sweet-Tart", 160, 0.75);
+INSERT INTO apples VALUES(6, "Envy", "Sweet", 25, 1.25);
+INSERT INTO apples VALUES(7, "Gala", "Sweet-Crisp", 130, 0.75);
+INSERT INTO apples VALUES(8, "Pazazz", "Sweet", 45, 0.80);
+INSERT INTO apples VALUES(9, "Jazz", "Sweet", 75, 0.75);
+INSERT INTO apples VALUES(10, "Braeburn", "Sweet-Tart", 90, 0.60);
+INSERT INTO apples VALUES(11, "Cameo", "Citrus-Sweet", 190, 0.45);
+INSERT INTO apples VALUES(12, "Holstein", "Sweet-Tart", 50, 2.25);
+INSERT INTO apples VALUES(13, "Golden Delicious", "Mild", 75, 0.45);
+INSERT INTO apples VALUES(14, "Hidden Rose", "Tart", 25, 5.00);
+INSERT INTO apples VALUES(15, "Ambrosia", "Sweet", 74, 1.30);
+
+--display the database ordered by price
+SELECT * FROM apples 
+ORDER BY price;
+
+--what is the avg price of apples "sweet" apples? 
+SELECT AVG(price) "avg sweet apple price"
+FROM apple
+where flavor='Sweet'; 
+
+--what are the most 5 expensive apples? 
+SELECT name, price
+FROM apples
+order by price desc
+limit 5; 
