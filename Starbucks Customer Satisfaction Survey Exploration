@@ -1,0 +1,45 @@
+SELECT * FROM customerSurvey;
+
+-- Who shops at Starbucks more? Men or women?
+SELECT DISTINCT COUNT(gender) AS genderCount, gender 
+FROM customerSurvey 
+GROUP BY gender;
+
+SELECT DISTINCT(timeSpent)
+FROM customerSurvey;
+
+-- How many people spend more than 3 hours at a time in Starbucks?
+SELECT COUNT(timeSpent)
+FROM customerSurvey
+WHERE timeSpent = 'More than 3 hours';
+
+-- What is the count of different amounts of time spent at Starbucks?
+SELECT DISTINCT COUNT(timeSpent), timeSpent
+FROM customerSurvey
+GROUP BY timeSpent;
+
+-- How many students who are over the age of 29 shop at Starbucks?
+SELECT COUNT(age) as olderThan29
+FROM customerSurvey
+WHERE age <> 'From 20 to 29'
+OR age <> 'Below 20';
+
+-- What is the most popular way to enjoy Starbucks?
+SELECT MAX(countEnjoymentType) AS mostPopular, enjoymentType
+FROM (SELECT COUNT(enjoymentType) AS countEnjoymentType, enjoymentType
+FROM customerSurvey
+GROUP BY enjoymentType) as T;
+
+-- What is the average quality rating for Starbucks (on a scale of 1-5)?
+SELECT AVG(qualityRating) AS avgRating
+FROM customerSurvey;
+
+-- How many shoppers are Starbucks members?
+SELECT COUNT(memberStatus) AS count, memberStatus
+FROM customerSurvey
+GROUP BY memberStatus;
+
+-- How many of those members are male?
+SELECT COUNT(memberStatus) AS memberCount, gender
+FROM customerSurvey
+WHERE gender = 'Male';
