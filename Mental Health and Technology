@@ -1,0 +1,57 @@
+--Display all data from table for quick glance analysis
+SELECT * from mentalHealth;
+
+--What are the statuses for mental health?
+SELECT Mental_Health_Status FROM mentalHealth GROUP BY Mental_Health_Status;
+
+--What is the average amount of time (hours) spent on social media?
+SELECT ROUND(AVG(Social_Media_Usage_Hours), 0) AS 'Average Hours on Social Media' FROM mentalHealth;
+
+--What is the average amount of sleep (hours) these users get?
+SELECT ROUND(AVG(Sleep_Hours), 0) AS 'Average Hours of Sleep' FROM mentalHealth;
+
+--Which gender spends more time playing video games?
+SELECT Gender, ROUND(AVG(Gaming_Hours), 2) AS 'Time Spent on Video Games' FROM mentalHealth GROUP BY Gender;
+
+--What is the youngest age recorded in the dataset?
+SELECT MIN(AGE)
+FROM mentalHealth;
+
+--What is the oldest age recorded in the dataset?
+SELECT MAX(AGE)
+FROM mentalHealth;
+
+--Is there a coorelation between age and technology usage?
+SELECT CASE
+    WHEN AGE < 30 THEN '18 to 29'
+    WHEN AGE >= 30 AND AGE < 50 THEN '30 to 49'
+    ELSE '50 to 65'
+END AS 'Age Group', ROUND(AVG(Technology_Usage_Hours), 2) AS 'Hours Spent Using Technology'
+FROM mentalHealth
+GROUP BY
+CASE
+    WHEN AGE < 30 THEN '18 to 29'
+    WHEN AGE >= 30 AND AGE < 50 THEN '30 to 49'
+    WHEN AGE >= 50 THEN '50 to 65'
+END;
+
+--How many people sleep at least 8 hours?
+SELECT COUNT(User_ID) AS 'Users with 8 or more hours of sleep' FROM mentalHealth WHERE Sleep_Hours >= '8';
+
+--How many people sleep less than 8 hours?
+SELECT COUNT(User_ID) AS 'Users with less than 8 hours of sleep' FROM mentalHealth WHERE Sleep_Hours < '8';
+
+--Of those who sleep less than 8 hours, how many have screen time greater than 3 hours?
+SELECT COUNT(User_ID) AS 'More than 3 hours of screen time' FROM mentalHealth WHERE Sleep_Hours < '8' AND Screen_Time_Hours >= '3';
+
+--Of those who sleep less than 8 hours, how many have screen time greater than 3 hours?
+SELECT COUNT(User_ID) AS 'More than 3 hours of screen time' FROM mentalHealth WHERE Sleep_Hours < '8' AND Screen_Time_Hours >= '6';
+
+--Do those with greater mental health spend less time with technology?
+SELECT ROUND(AVG(Technology_Usage_Hours), 2) AS 'Average Hours on Tech', Mental_Health_Status FROM mentalHealth GROUP BY Mental_Health_Status;
+
+--How many people utilize online support systems?
+SELECT COUNT(Online_Support_Usage) AS 'Yes Support', Mental_Health_Status FROM mentalHealth WHERE Online_Support_Usage = 'Yes' GROUP BY Mental_Health_Status;
+
+--What are the mental health statuses of those who don't utilize support systems?
+SELECT COUNT(Online_Support_Usage) AS 'No Support', Mental_Health_Status FROM mentalHealth WHERE Online_Support_Usage = 'No' GROUP BY Mental_Health_Status;
