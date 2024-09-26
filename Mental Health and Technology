@@ -44,7 +44,7 @@ SELECT COUNT(User_ID) AS 'Users with less than 8 hours of sleep' FROM mentalHeal
 --Of those who sleep less than 8 hours, how many have screen time greater than 3 hours?
 SELECT COUNT(User_ID) AS 'More than 3 hours of screen time' FROM mentalHealth WHERE Sleep_Hours < '8' AND Screen_Time_Hours >= '3';
 
---Of those who sleep less than 8 hours, how many have screen time greater than 3 hours?
+--Of those who sleep less than 8 hours, how many have screen time greater than 6 hours?
 SELECT COUNT(User_ID) AS 'More than 3 hours of screen time' FROM mentalHealth WHERE Sleep_Hours < '8' AND Screen_Time_Hours >= '6';
 
 --Do those with greater mental health spend less time with technology?
