@@ -1,0 +1,81 @@
+USE asthma;
+
+-- Retrieve all the columns in the table for an overview of data.
+SELECT * FROM asthma_disease_data;
+
+-- Of those with asthma, how many also have an allergy to pets?
+SELECT COUNT(PetAllergy) FROM asthma_disease_data WHERE Diagnosis = 1 AND PetAllergy = 1;
+
+-- And how many do not have an allergy to pets?
+SELECT COUNT(PetAllergy) AS 'No Allergy' FROM asthma_disease_data WHERE Diagnosis = 1 AND PetAllergy = 0;
+
+-- How many of those with asthma have a family history of asthma?
+SELECT COUNT(FamilyHistoryAsthma) FROM asthma_disease_data WHERE Diagnosis = 1 AND FamilyHistoryAsthma = 1; 
+
+-- What is the youngest age found in the dataset?
+SELECT MIN(Age) FROM asthma_disease_data;
+
+-- What is the oldest age found in the dataset?
+SELECT MAX(Age) FROM asthma_disease_data;
+
+-- What is the average (mean) age found in the dataset?
+SELECT ROUND(AVG(Age), 0) FROM asthma_disease_data;
+
+-- How many patients are in this dataset?
+SELECT COUNT(*) FROM asthma_disease_data;
+
+-- Of those over the age of 21, how many people smoke?
+SELECT COUNT(Smoking) FROM asthma_disease_data WHERE Age >= 21 AND Smoking = 1;
+
+-- And how many do not smoke?
+SELECT COUNT(Smoking) FROM asthma_disease_data WHERE Age >= 21 AND Smoking = 0;
+
+-- How many males are in the dataset?
+SELECT COUNT(Gender) FROM asthma_disease_data WHERE Gender = 0;
+
+-- How many males have asthma?
+SELECT COUNT(Gender) FROM asthma_disease_data WHERE Gender = 0 AND Diagnosis = 1;
+
+-- How many females are in the dataset?
+SELECT COUNT(Gender) FROM asthma_disease_data WHERE Gender = 1;
+
+-- How many females have asthma?
+SELECT COUNT(Gender) FROM asthma_disease_data WHERE Gender = 1 AND Diagnosis = 1;
+
+-- How many people report being affected by Wheezing?
+SELECT COUNT(Wheezing) FROM asthma_disease_data WHERE Wheezing = 1;
+
+-- How many of those people smoke?
+SELECT COUNT(Wheezing) FROM asthma_disease_data WHERE Wheezing = 1 AND Smoking = 1;
+
+-- Of those who do wheeze, how many were diagnosed with asthma?
+SELECT COUNT(Wheezing) AS 'Wheezing W/ Asthma' FROM asthma_disease_data WHERE Wheezing = 1 AND Diagnosis = 1;
+
+-- On average, how many people report wheezing?
+SELECT ROUND(AVG(Wheezing_Count), 0) AS Average_Wheezers FROM 
+(SELECT COUNT(Wheezing) AS Wheezing_Count FROM asthma_disease_data WHERE Wheezing = 1) 
+AS t;
+
+-- What is the average BMI present in the dataset?
+SELECT AVG(BMI) FROM asthma_disease_data;
+
+-- How many people are physically active?
+SELECT COUNT(*) FROM asthma_disease_data WHERE PhysicalActivity > 0;
+
+-- How many people are physically active for atleast 2 hours?
+SELECT COUNT(*) FROM asthma_disease_data WHERE PhysicalActivity >= 2;
+
+-- How many of those with asthma also have eczema?
+SELECT COUNT(*) FROM asthma_disease_data WHERE Eczema = 1 and Diagnosis = 1;
+
+-- How many people report that their symptoms are brought on by exercise?
+SELECT COUNT(*) FROM asthma_disease_data WHERE ExerciseInduced = 1;
+
+-- Of those who report the above, how many have a BMI over 25?
+SELECT COUNT(*) FROM asthma_disease_data WHERE ExerciseInduced = 1 AND BMI > 25;
+
+-- What is the average diet quality of those in the dataset?
+SELECT AVG(DietQuality) FROM asthma_disease_data;
+
+-- And the max diet quality?
+SELECT MAX(DietQuality) FROM asthma_disease_data;
